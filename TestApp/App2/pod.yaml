@@ -1,0 +1,42 @@
+# Set up the pod configuration for deploying App-A to cluster
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-a
+  labels:
+    app: pod-a
+spec:
+  containers:
+    - name: nodejs
+      image: siravichmek/kubernetes:application-a
+      ports:
+        - containerPort: 8084
+
+    - name: mysql
+      image: siravichmek/kubernetes:application-a-mysql
+      env:
+        - name: MYSQL_ROOT_PASSWORD
+          value: root
+        - name: MYSQL_DATABASE
+          value: app-a
+      ports:
+        - containerPort: 3306
+      volumeMounts:
+        - name: mysql-data
+          mountPath: /var/lib/mysql
+
+    - name: phpmyadmin
+      image: siravichmek/kubernetes:application-a-phpmyadmin
+      env:
+        - name: PMA_HOST
+          value: mysql
+        - name: PMA_USER
+          value: root
+        - name: PMA_PASSWORD
+          value: root
+      ports:
+        - containerPort: 80
+
+  volumes:
+    - name: mysql-data
+      emptyDir: {}

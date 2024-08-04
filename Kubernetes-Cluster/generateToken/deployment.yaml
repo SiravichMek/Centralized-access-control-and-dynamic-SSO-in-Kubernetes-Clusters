@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gentoken-service2
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: gentoken-service2
+  template:
+    metadata:
+      labels:
+        app: gentoken-service2  
+    spec:
+      containers:
+      - name: gentoken-service2-container
+        image: siravichmek/kubernetes:service22  # <image-name>:tag
+        ports:
+        - containerPort: 3008
+
+
+        

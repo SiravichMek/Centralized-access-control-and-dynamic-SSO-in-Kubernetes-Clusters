@@ -1,0 +1,10 @@
+# Role definition for pod-a reader
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: pod-a-reader
+rules:
+- apiGroups: ["*"]
+  resources: ["*"]
+  resourceNames: ["*"]
+  verbs: ["get", "list"] 

@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: grant-role-service
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: grant-role-service
+  template:
+    metadata:
+      labels:
+        app: grant-role-service  
+    spec:
+      containers:
+      - name: grant-role-service-container
+        image: siravichmek/kubernetes:service2  # <image-name>:tag
+        ports:
+        - containerPort: 3002
+
+
+        

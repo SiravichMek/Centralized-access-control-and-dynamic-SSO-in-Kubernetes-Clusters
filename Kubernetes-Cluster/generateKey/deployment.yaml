@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: randomtext-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: randomtext-service
+  template:
+    metadata:
+      labels:
+        app: randomtext-service  
+    spec:
+      containers:
+      - name: randomtext-service-container
+        image: siravichmek/kubernetes:service  # <image-name>:tag
+        ports:
+        - containerPort: 3001
+
+
+        

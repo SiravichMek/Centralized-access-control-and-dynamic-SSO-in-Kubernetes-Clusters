@@ -1,0 +1,19 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: pod-a-reader-binding
+  namespace: default
+subjects:
+- kind: ServiceAccount
+  name: default
+  namespace: default
+- kind: User
+  name: srv2014m@gmail.com
+  apiGroup: rbac.authorization.k8s.io
+- kind: User
+  name: 6422782704@g.siit.tu.ac.th
+  apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: Role
+  name: pod-a-reader
+  apiGroup: rbac.authorization.k8s.io
