@@ -1,0 +1,33 @@
+version: '3'
+
+services:
+  nodejs:
+    build: .
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mysql
+
+  mysql:
+    image: mysql:latest
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: kubernetes_cluster
+    volumes:
+      - ./mysql-data:/var/lib/mysql
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    restart: always
+    environment:
+      PMA_HOST: mysql
+      PMA_USER: root
+      PMA_PASSWORD: root
+    ports:
+      - "9090:80"
+    depends_on:
+      - mysql
+
+volumes:
+  mysql-data:
